@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 
 // Mocking if a user logs in
 const auth_data_present = {
@@ -27,8 +27,6 @@ export const AuthProvider = ({ children }) => {
   // TO-DO: onSignup
   // TO-DO: onLogin
   // TO-DO: onLogout
-
-  // TO-DO: cookies to store auth data
 
   return (
     <AuthContext.Provider
