@@ -7,6 +7,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import { CiLogin } from "react-icons/ci";
 
 const Profile = () => {
   const authContext = useAuth();
@@ -43,7 +44,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="relative w-screen max-w-full h-[95vh] py-40 overflow-x-clip grid place-content-center mt-10">
+    <div className="relative w-screen max-w-full h-[100vh] py-40 overflow-x-clip grid place-content-center mt-10">
       <div className="h-fit py-6 px-8 w-[440px] flex flex-col items-center gap-y-6 rounded-[32px] border-[#CBD5E1] border-2 shadow-[0_0.52vw_1.56vw_0_rgba(0,0,0,0.15)] z-0">
         <h1 className="font-bold text-3xl text-black">Your Pawrent Profile</h1>
 
@@ -98,6 +99,21 @@ const Profile = () => {
           Save
           <MdOutlineSave className="text-lg text-white" />
         </button>
+
+        <div className="w-full h-4 relative flex items-center">
+          <span className="w-full h-[1px] bg-[#CBD5E1]"></span>
+          <p className="absolute left-1/2 -translate-x-1/2 bg-white h-4 w-8 font-bold text-[#94A3B8] grid place-content-center text-sm">
+            OR
+          </p>
+        </div>
+
+        {/* Log Out button */}
+        <Link
+          href="/"
+          className="w-full flex justify-center items-center gap-x-2 text-black font-bold bg-white rounded-full py-2 border-2 border-[#CBD5E1]">
+          Log out
+          <CiLogin className="text-lg" />
+        </Link>
       </div>
     </div>
   );

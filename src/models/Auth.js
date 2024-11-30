@@ -8,4 +8,4 @@ const AuthSchema = new mongoose.Schema({
   username: { type: String, required: true },
 });
 
-module.exports = mongoose.model("Auth", AuthSchema);
+module.exports = mongoose.models.Auth || mongoose.model("Auth", AuthSchema);

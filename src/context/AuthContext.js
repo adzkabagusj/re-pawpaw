@@ -17,7 +17,7 @@ const auth_data_null = undefined;
 const AuthContext = createContext(undefined);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(auth_data_present);
+  const [user, setUser] = useState(auth_data_null);
 
   // for profile page edit functionality
   const updateUser = (updatedData) => {
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
   // TO-DO: onSignup
   // TO-DO: onLogin
-  // TO-DO: onLogout
+  // TO-DO: onLogout (the logout button is profile page)
 
   return (
     <AuthContext.Provider

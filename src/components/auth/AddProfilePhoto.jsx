@@ -1,15 +1,18 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { MdOutlineSave } from "react-icons/md";
 import { LuPencilLine } from "react-icons/lu";
-import { useState } from "react";
-import Image from "next/image";
 
 const AddProfilePhoto = () => {
+  const router = useRouter();
   const [profilePhoto, setProfilePhoto] = useState(
     "/DefaultProfilePicture.png"
   );
+  const [isLoading, setIsLoading] = useState(false);
 
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
@@ -19,6 +22,31 @@ const AddProfilePhoto = () => {
         setProfilePhoto(reader.result);
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSavePhoto = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch("/api/auth/update-profile-photo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ profilePhoto }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        router.push("/");
+      } else {
+        console.error(result.error);
+      }
+    } catch (error) {
+      console.error("Profile photo upload error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -56,12 +84,13 @@ const AddProfilePhoto = () => {
         </div>
 
         {/* Save button */}
-        <Link
-          href="/"
-          className="w-full flex justify-center items-center gap-x-2 text-white font-bold bg-pink-main rounded-full py-2">
-          Save
+        <button
+          onClick={handleSavePhoto}
+          disabled={isLoading}
+          className="w-full flex justify-center items-center gap-x-2 text-white font-bold bg-pink-main rounded-full py-2 disabled:opacity-50">
+          {isLoading ? "Saving..." : "Save"}
           <MdOutlineSave className="text-lg text-white" />
-        </Link>
+        </button>
 
         {/* Skip button */}
         <Link
